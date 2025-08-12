@@ -1,0 +1,768 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date with Ayushi</title>
+  <link rel="icon" type="image/x-icon" href="view/ayushi&abhi1.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
+
+    :root {
+      --lavender: #E6E6FA;
+      --deep-lavender: #9370DB;
+      --light-lavender: #e9e3e3;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: black;
+      color: #807d7d;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background-color: var(--deep-lavender);
+    }
+
+    .navbar-brand,
+    .nav-link {
+      color: white !important;
+    }
+
+    .navbar-brand {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Pacifico', cursive;
+      color: var(--deep-lavender);
+    }
+
+    .btn-custom {
+      border-radius: 50px;
+
+      background-color: var(--deep-lavender);
+      border: none;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #8A2BE2;
+      transform: scale(1.05);
+      color: white;
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 4px 6px rgba(111, 135, 190, 0.861);
+      transition: all 0.3s ease;
+      background-color: var(--light-lavender);
+
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .footer {
+      background-color: var(--deep-lavender);
+      color: white;
+      padding: 20px 0;
+    }
+
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background-color: var(--light-lavender);
+    }
+
+    .modal-header {
+      background-color: var(--deep-lavender);
+      color: white;
+    }
+
+    .icon-feature {
+      font-size: 3rem;
+      color: var(--deep-lavender);
+      margin-bottom: 1rem;
+    }
+
+    .timeline {
+
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--deep-lavender);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+
+    .timeline-container {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+
+    .timeline-container::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -17px;
+      background-color: var(--light-lavender);
+      border: 4px solid var(--deep-lavender);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .left {
+      left: 0;
+    }
+
+    .right {
+      left: 50%;
+    }
+
+    .left::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      right: 30px;
+      border: medium solid var(--deep-lavender);
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent var(--deep-lavender);
+    }
+
+    .right::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      left: 30px;
+      border: medium solid var(--deep-lavender);
+      border-width: 10px 10px 10px 0;
+      border-color: transparent var(--deep-lavender) transparent transparent;
+    }
+
+    .right::after {
+      left: -16px;
+    }
+
+    .timeline-content {
+      background-color: var(--light-lavender);
+      padding: 20px 30px;
+      /* background-color: white; */
+      position: relative;
+      border-radius: 6px;
+    }
+
+    .parallax {
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .parallax-text {
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .testimonial {
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .playlist {
+      background-color: var(--light-lavender);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .playlist-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .playlist-item i {
+      margin-right: 10px;
+    }
+
+    .why-me-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .why-me-icon {
+      font-size: 2rem;
+      color: var(--deep-lavender);
+      margin-right: 15px;
+    }
+
+    .floating {
+      animation-name: floating;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes floating {
+      0% {
+        transform: translate(0, 0px);
+      }
+
+      50% {
+        transform: translate(0, 15px);
+      }
+
+      100% {
+        transform: translate(0, -0px);
+      }
+    }
+
+    .heart-trail {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .doodle {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .music-notes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9997;
+    }
+
+    .music-note {
+      position: absolute;
+      font-size: 24px;
+      color: var(--deep-lavender);
+      opacity: 0;
+    }
+
+    .surprise-box {
+      width: 200px;
+      height: 200px;
+      background-color: var(--deep-lavender);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0 auto;
+    }
+
+    .surprise-box:hover {
+      transform: scale(1.05);
+    }
+
+    .surprise-box i {
+      font-size: 4rem;
+      color: white;
+    }
+
+    /* #whyMeContent {
+      display: none;
+    } */
+
+    @media screen and (max-width: 600px) {
+      .timeline::after {
+        left: 31px;
+      }
+
+      .timeline-container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .timeline-container::before {
+        left: 60px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+      }
+
+      .left::after,
+      .right::after {
+        left: 15px;
+      }
+
+      .right {
+        left: 0%;
+      }
+    }
+
+    .playlist {
+      background-color: var(--light-lavender);
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .playlist-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .playlist-item i {
+      margin-right: 10px;
+    }
+
+    .why-me-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .why-me-icon {
+      font-size: 2rem;
+      color: var(--deep-lavender);
+      margin-right: 15px;
+    }
+
+    .floating {
+      animation-name: floating;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes floating {
+      0% {
+        transform: translate(0, 0px);
+      }
+
+      50% {
+        transform: translate(0, 15px);
+      }
+
+      100% {
+        transform: translate(0, -0px);
+      }
+    }
+
+    .heart-trail {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .doodle {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .music-notes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9997;
+    }
+
+    .music-note {
+      position: absolute;
+      font-size: 24px;
+      color: var(--deep-lavender);
+      opacity: 0;
+    }
+
+    #audioPlayer {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .timeline::after {
+        left: 31px;
+      }
+
+      .timeline-container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .timeline-container::before {
+        left: 60px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+      }
+
+      .left::after,
+      .right::after {
+        left: 15px;
+      }
+
+      .right {
+        left: 0%;
+      }
+    }
+
+    .date-image {
+      max-width: 70%;
+      height: auto;
+
+
+    }
+
+    #why-you {
+
+
+      border: 2px solid var(--deep-lavender);
+      border-radius: 20px;
+    }
+
+    #the-date {
+      border: 2px solid var(--deep-lavender);
+      border-radius: 20px;
+    }
+
+    #testimonials {
+      border: 2px solid var(--deep-lavender);
+      border-radius: 20px;
+    }
+
+    #pp {
+      text-align: justify
+    }
+
+    .bold {
+
+      font-weight: bold;
+    }
+
+    #timer {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container justify-content-center">
+      <a class="navbar-brand " href="#home">Date with Ayushi <i class="fas fa-heart"></i></a>
+
+    </div>
+  </nav>
+
+ <div id="why-you" class="container py-5 " style="margin-top: 20px;">
+    <div class="row">
+      <div class="col-md-12 text-center">
+   
+              <h1>Hey My friend Kritika </h1>
+              <p class="px-5">If I could, I’d be right there beside you rn...just to see that beautiful smile in person and listen to your bak bak</p>
+<p> Love to see you're surrounded by lovely friend and family, but I secretly wish it was me making you blush.</p>
+<h4>Eargely waiting to eat cake made by you and Vadi, Khade baigan and bade too.
+Miss you a litt.</h4>
+      </div>
+     
+     
+    </div>
+  </div>
+
+
+  <div id="home" class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1   class="display-4 mb-5 mt-5 ">Kritika, I know I'm not important to you but still you talk everyday that's make me happy 
+        <!-- <h1 class="display-4 mb-5 mt-5 ">Last Message</i></h1> -->
+        <!-- <p id="pp" class="lead mb-4 ">I know I made mistakes i am so sorry for that, and I will work on them because you
+          mean that much to me. one day i will tell you the truth behind of all this mistakes. But no one is perfect,
+          <span class="bold">where there are good things, there will also be
+            flaws</span>. I never claimed to be flawless, but my feelings for you have always been real, always been
+          true.</p> -->
+
+         -->
+         <button class="btn btn-custom btn-lg mt-4 mb-5 " onclick="showModal()">yes <i
+          class="fas fa-check"></i></button>
+
+
+
+        <!-- <div id="playlist" class="container py-5"> -->
+          <!-- <h2 class="text-center mb-5">Our Playlist <i class="fas fa-headphones"></i></h2> -->
+          <!-- <div class="playlist"> -->
+            <!-- <h3 style="color: black;">Day 1: Without You, But With You</h3> -->
+            <!-- <h1 class="display-4 mb-5 mt-5 "></i></h1> -->
+            <!-- <p style="text-align: justify">
+          <!-- </div> -->
+        <!-- </div> -->
+
+
+        <div id="playlist" class="container py-5">
+          <div class="playlist">
+            <h3 style="color: black;">Day 10: Still You, Always You </h3>
+            <h1 class="display-4 mb-5 mt-5 "></i></h1>
+            <p style="text-align: justify">
+              20 March 2025
+              <br><br>
+              Good Morning! Ayushi, how are you? I hope you are doing well, and now hoping that my absence giving you
+              the space and the peace that my presence couldn't. accordion
+              <br><br>
+              Ayushi, you know I am not perfect. I make mistakes, I mess up, but one thing I’ve never failed at is
+              loving you. That’s the one thing I have always done with all my heart.
+              <br><br>
+              I don’t have big words or fancy lines, just one simple truth I will always be here, just like I always
+              was. No matter you are with me or not.
+              <br><br>
+              Good night, Ayushi. Sleep well, dream sweet, and know that someone is thinking of you.
+
+            </p>
+          </div>
+        </div>
+
+        <div id="playlist" class="container py-5">
+          <div class="playlist">
+            <h3 style="color: black;">Day 11: This Feels So Real</h3>
+            <h1 class="display-4 mb-5 mt-5 "></i></h1>
+            <p style="text-align: justify">
+              21 March 2025
+              <br><br>
+              Good Morning Golu! I hope you woke up with a smile today, I don’t know what your day holds, but mine is
+              you, your smile, your(Tumse sab neeche neeche hai).
+              <br><br>
+              I don’t know how, but I’m falling in love with this little space—DateWithAyushi. Every time I write here,
+              it feels like I’m really talking to you, like you are sitting right in front of me, listening to every
+              word, every feeling.
+              <br><br>
+              It’s special… so special. Because even if we are apart, this makes me feel close to you. Like my words are
+              reaching you, like my heart still has a way to find yours.
+
+              Maybe it’s just me, but every time I write, I imagine you smiling while reading it. And that’s enough for
+              me. And i don't thing we broke up, I feel we are still same like we are Baby.
+              <br><br>
+              Good night, Ayushi. Sleep well, dream sweet, and know that you are always in my heart.
+
+
+            </p>
+          </div>
+        </div>
+
+          <!-- <div id="playlist" class="container py-5">
+          <div class="playlist">
+            <h3 style="color: black;">Day 1: Without You, But With You</h3>
+            <h1 class="display-4 mb-5 mt-5 "></i></h1>
+            <p style="text-align: justify">
+               24 March 2025
+              <br><br>
+            </p>
+          </div>
+        </div> -->
+
+
+        <!-- <div id="playlist" class="container py-5">
+          <div class="playlist">
+
+            <h3 style="color: black;" class="text-center">Message Box</h3>
+            <h1 class="display-4 mb-5 mt-5 text-center">The End ( 22 March 2025)
+              </i></h1>
+
+          </div>
+        </div> -->
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <div >
+    <h2 class="display-4 text-center parallax-text">“Pata hai… Yahaan se bahut door, galat aur sahi ke paar, ek maidan hai, main wahaan milunga tujhe"</h2>
+  </div>
+   -->
+  <div id="why-you" class="container py-5">
+    <h2 class="text-center mb-5">Why You, Kritika? <i class="fas fa-heart"></i></h2>
+    <div class="row">
+      <div class="col-md-4 mb-4 " data-aos="fade-up" data-aos-duration="700">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <i class="fas fa-smile icon-feature floating"></i>
+            <h5 class="card-title">Your Radiant Smile</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4"  data-aos="fade-up" data-aos-duration="900">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <i class="fas fa-hand-holding-heart icon-feature floating"></i>
+            <h5 class="card-title">Your Kind Heart</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4"  data-aos="fade-up" data-aos-duration="1100">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <i class="fas fa-music icon-feature floating"></i>
+            <h5 class="card-title">Similar vibes</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4"  data-aos="fade-up" data-aos-duration="1300">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <i class="fas fa-star icon-feature floating"></i>
+            <h5 class="card-title">Your Cuteness</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4"  data-aos="fade-up" data-aos-duration="1500">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <i class="fas fa-laugh icon-feature floating"></i>
+            <h5 class="card-title">Good Humor</h5>
+          </div>
+        </div>
+      </div>
+     
+      <div class="col-md-4 mb-4"  data-aos="fade-up" data-aos-duration="1700">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <i class="fas fa-plus icon-feature floating"></i>
+            <h5 class="card-title">More & More </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="why-me" class="container py-5">
+    <h2 class="text-center mb-5">Why Me? <i class="fas fa-user-circle"></i></h2>
+  <!-- <div class="surprise-box" onclick="revealWhyMe()">
+      <i class="fas fa-gift"></i>
+    </div> -->
+  <div id="whyMeContent" class="mt-4">
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="why-me-item"  data-aos="fade-up" data-aos-duration="900">
+            <i class="fas fa-laugh-beam why-me-icon floating"></i>
+            <div>
+              <h5>Always Take care of You </h5>
+              <p>I promise to keep you laughing with my quirky jokes and my memes edits. Life's too short not to enjoy a
+                good laugh together!</p>
+            </div>
+          </div>
+        </div>
+
+  <div class="col-md-6 mb-4">
+          <div class="why-me-item"  data-aos="fade-up" data-aos-duration="1000">
+            <i class="fas fa-hands-helping why-me-icon floating"></i>
+            <div>
+              <h5>Supportive Partner</h5>
+              <p>I'll be your biggest cheerleader, supporting your dreams and ambitions, including your bakery startup journey.
+                I'll help you always in your career</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="why-me-item"  data-aos="fade-up" data-aos-duration="1100">
+            <i class="fas fa-utensils why-me-icon floating"></i>
+            <div>
+              <h5>Good in irritating</h5>
+              <p>I’m always irritating you, But also makes you smile like this. Irritating like ignore karti ho reply nahi deti ho</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="why-me-item"  data-aos="fade-up" data-aos-duration="1200">
+            <i class="fas fa-heart why-me-icon floating"></i>
+            <div>
+              <h5>God's plan</h5>
+              <p>In a world full of uncertainties, Let's belive in god plan and ride him our boats. I will always here for you</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="parallax" style="background-image: url('');">
+    <h2 class="display-4 text-center parallax-text">Creating Melodies Together</h2>
+  </div>
+  
+  <div id="our-story" class="container py-5">
+    <h2 class="text-center mb-5">Our Story <i class="fas fa-book-open"></i></h2>
+    <div class="timeline">
+      <div class="timeline-container left"  data-aos="fade-left" data-aos-duration="1000">
+        <div class="timeline-content">
+          <h2>First Meeting </h2>
+          <p>29.March.2024</p>
+          <p style="text-align: justify">It was boring and hectic day for me but when I met you in Hyderabad office feels like adorable day. The way you carried confident, quiet and a little mysterious bak bak person, it hit me different</p>
+        </div>
+      </div>
+      <div class="timeline-container left"  data-aos="fade-left" data-aos-duration="1100">
+        <div class="timeline-content">
+          <h2>Shared Laughter <i class="fas fa-laugh"></i></h2>
+          <p style="text-align: justify">We started chatting more and shared so much laughter and memes, as you like so much that dark Humor. The way you send me baby memes and cat memes loved it.
+            (hehehe)</p>
+        </div>
+      </div>
+</body>
+
+</html>
